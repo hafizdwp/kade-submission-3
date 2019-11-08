@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="me.hafizdwp.kade_submission_3.data.source.remote.model.MatchResponse" />
+
+        <variable
+            name="homeData"
+            type="me.hafizdwp.kade_submission_3.data.source.remote.model.TeamResponse" />
+
+        <variable
+            name="awayData"
+            type="me.hafizdwp.kade_submission_3.data.source.remote.model.TeamResponse" />
+
+        <variable
+            name="viewModel"
+            type="me.hafizdwp.kade_submission_3.mvvm.detail.DetailMatchViewModel" />
+
+        <variable
+            name="actionListener"
+            type="me.hafizdwp.kade_submission_3.base.BaseProgressListener" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <me.hafizdwp.kade_submission_3.util.widget.MyProgressView
+                android:id="@+id/myProgressView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                bind:progressListener="@{actionListener}"
+                bind:progressState="@{viewModel.bProgressState}" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dimens_16dp">
+
+                <!-- Toolbar -->
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="?actionBarSize"
+                    android:background="@color/colorPrimary"
+                    android:theme="@style/ActionBarTheme"
+                    app:contentInsetEnd="0dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="?android:attr/actionBarSize"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/match_detail"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+                <!-- Top Content: Preview -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/topCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimens_16dp"
+                    android:layout_marginTop="@dimen/dimens_16dp"
+                    android:layout_marginRight="@dimen/dimens_16dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimens_24dp">
+
+                        <TextView
+                            android:id="@+id/textLeague"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@{data.strLeague}"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_18sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="English Premiere League" />
+
+                        <TextView
+                            android:id="@+id/textDate"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_2dp"
+                            android:fontFamily="@font/samsungsans_regular"
+                            android:includeFontPadding="false"
+                            android:text="@{homeData.strStadium + ` - ` + homeData.strStadiumLocation + ` ` + data.strDate + ` ` + data.strTimeLocal}"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/size_14sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textLeague"
+                            tools:text="Etihad Stadium - Manchester 25/11/2019 20:45CET" />
+
+                        <ImageView
+                            android:id="@+id/imgHome"
+                            android:layout_width="@dimen/dimens_84dp"
+                            android:layout_height="@dimen/dimens_84dp"
+                            android:layout_marginTop="@dimen/dimens_16dp"
+                            android:adjustViewBounds="true"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textDate"
+                            bind:loadImage="@{homeData.strTeamBadge}"
+                            tools:src="@drawable/dummy2" />
+
+                        <TextView
+                            android:id="@+id/textHomeScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_16dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@{data.intHomeScore}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_28sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgHome"
+                            app:layout_constraintLeft_toRightOf="@+id/imgHome"
+                            app:layout_constraintTop_toTopOf="@+id/imgHome"
+                            tools:text="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="vs"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_24sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textHomeScore"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeScore"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayScore"
+                            app:layout_constraintTop_toTopOf="@+id/textHomeScore" />
+
+                        <ImageView
+                            android:id="@+id/imgAway"
+                            android:layout_width="@dimen/dimens_84dp"
+                            android:layout_height="@dimen/dimens_84dp"
+                            android:layout_marginTop="@dimen/dimens_16dp"
+                            android:adjustViewBounds="true"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textDate"
+                            bind:loadImage="@{awayData.strTeamBadge}"
+                            tools:src="@drawable/dummy2" />
+
+                        <TextView
+                            android:id="@+id/textAwayScore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimens_16dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@{data.intAwayScore}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_28sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgAway"
+                            app:layout_constraintRight_toLeftOf="@+id/imgAway"
+                            app:layout_constraintTop_toTopOf="@+id/imgAway"
+                            tools:text="1" />
+
+                        <TextView
+                            android:id="@+id/textHomeName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_16dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@{homeData.strTeam}"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_20sp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayName"
+                            app:layout_constraintTop_toBottomOf="@+id/imgHome"
+                            tools:text="Manchester United" />
+
+                        <TextView
+                            android:id="@+id/textAwayName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_16dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@{awayData.strTeam}"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_20sp"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeName"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/imgHome"
+                            tools:text="Manchester United" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Mid Content: Goals -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/midCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimens_16dp"
+                    android:layout_marginTop="@dimen/dimens_8dp"
+                    android:layout_marginRight="@dimen/dimens_16dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topCard">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgIconGoals"
+                            android:layout_width="@dimen/dimens_20dp"
+                            android:layout_height="@dimen/dimens_20dp"
+                            android:layout_marginTop="@dimen/dimens_16dp"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textGoalsLabel"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_ball" />
+
+                        <TextView
+                            android:id="@+id/textGoalsLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@string/goals"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgIconGoals"
+                            app:layout_constraintLeft_toRightOf="@+id/imgIconGoals"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/imgIconGoals" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:clipToPadding="false"
+                            android:nestedScrollingEnabled="false"
+                            android:paddingLeft="@dimen/dimens_24dp"
+                            android:paddingRight="@dimen/dimens_24dp"
+                            android:paddingBottom="@dimen/dimens_16dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textGoalsLabel" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Bottom Content: Lineups -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/bottomCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimens_16dp"
+                    android:layout_marginTop="@dimen/dimens_8dp"
+                    android:layout_marginRight="@dimen/dimens_16dp"
+                    app:cardUseCompatPadding="true"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/midCard">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dimens_24dp"
+                        android:paddingTop="@dimen/dimens_16dp"
+                        android:paddingRight="@dimen/dimens_24dp"
+                        android:paddingBottom="@dimen/dimens_16dp">
+
+                        <ImageView
+                            android:id="@+id/imgIconLineups"
+                            android:layout_width="@dimen/dimens_20dp"
+                            android:layout_height="@dimen/dimens_20dp"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textLineupsLabel"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_football_uniform" />
+
+                        <TextView
+                            android:id="@+id/textLineupsLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:includeFontPadding="false"
+                            android:text="@string/lineups"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/size_18sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/imgIconLineups"
+                            app:layout_constraintLeft_toRightOf="@+id/imgIconLineups"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/imgIconLineups" />
+
+                        <View
+                            android:layout_width="0.5dp"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="@dimen/dimens_4dp"
+                            android:background="@color/grey"
+                            app:layout_constraintBottom_toBottomOf="@+id/barrierForward"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeGkLabel"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayGkLabel"
+                            app:layout_constraintTop_toTopOf="@+id/textHomeGkLabel" />
+
+                        <!-- -->
+                        <!-- Goalkeeper -->
+                        <!-- -->
+
+                        <TextView
+                            android:id="@+id/textHomeGkLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/goalkeeper"
+                            android:textColor="@color/black"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayGkLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/textLineupsLabel" />
+
+                        <TextView
+                            android:id="@+id/textAwayGkLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/goalkeeper"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeGkLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textLineupsLabel" />
+
+                        <TextView
+                            android:id="@+id/textHomeGk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayGk"
+                            app:layout_constraintTop_toBottomOf="@+id/textHomeGkLabel"
+                            bind:textLineups="@{data.strHomeLineupGoalkeeper}"
+                            tools:text="Jordan Pickford" />
+
+                        <TextView
+                            android:id="@+id/textAwayGk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="textEnd"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeGk"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textAwayGkLabel"
+                            bind:textLineups="@{data.strAwayLineupGoalkeeper}"
+                            tools:text="Jordan Pickford" />
+
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrierGk"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:barrierDirection="bottom"
+                            app:constraint_referenced_ids="textHomeGk,textAwayGk"
+                            app:layout_constraintRight_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                        <!-- -->
+                        <!-- Defense -->
+                        <!-- -->
+
+                        <TextView
+                            android:id="@+id/textHomeDefenseLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/defense"
+                            android:textColor="@color/black"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayDefenseLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/barrierGk" />
+
+                        <TextView
+                            android:id="@+id/textAwayDefenseLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/defense"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeDefenseLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/barrierGk" />
+
+                        <TextView
+                            android:id="@+id/textHomeDefense"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimens_8dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayDefense"
+                            app:layout_constraintTop_toBottomOf="@+id/textHomeDefenseLabel"
+                            bind:textLineups="@{data.strHomeLineupDefense}"
+                            tools:text="Marcelo\nMarcelo\nMarcelo" />
+
+                        <TextView
+                            android:id="@+id/textAwayDefense"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8dp"
+                            android:textAlignment="textEnd"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeDefense"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textAwayDefenseLabel"
+                            bind:textLineups="@{data.strAwayLineupDefense}"
+                            tools:text="Marcelo\nMarcelo\nMarcelo" />
+
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrierDefense"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:barrierDirection="bottom"
+                            app:constraint_referenced_ids="textHomeDefense,textAwayDefense"
+                            app:layout_constraintRight_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                        <!-- -->
+                        <!-- Midfielder -->
+                        <!-- -->
+
+                        <TextView
+                            android:id="@+id/textHomeMidfielderLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/midfielder"
+                            android:textColor="@color/black"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayMidfielderLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/barrierDefense" />
+
+                        <TextView
+                            android:id="@+id/textAwayMidfielderLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/midfielder"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeMidfielderLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/barrierDefense" />
+
+                        <TextView
+                            android:id="@+id/textHomeMidfielder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimens_8dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayMidfielder"
+                            app:layout_constraintTop_toBottomOf="@+id/textHomeMidfielderLabel"
+                            bind:textLineups="@{data.strHomeLineupMidfield}"
+                            tools:text="Marcelo\nMarcelo\nMarcelo" />
+
+                        <TextView
+                            android:id="@+id/textAwayMidfielder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8dp"
+                            android:textAlignment="textEnd"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeMidfielder"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textAwayMidfielderLabel"
+                            bind:textLineups="@{data.strAwayLineupMidfield}"
+                            tools:text="Marcelo\nMarcelo\nMarcelo" />
+
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrierMidfielder"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:barrierDirection="bottom"
+                            app:constraint_referenced_ids="textHomeMidfielder,textAwayMidfielder"
+                            app:layout_constraintRight_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+
+                        <!-- -->
+                        <!-- Forward -->
+                        <!-- -->
+
+                        <TextView
+                            android:id="@+id/textHomeForwardLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/forward"
+                            android:textColor="@color/black"
+                            app:layout_constraintHorizontal_chainStyle="spread_inside"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayForwardLabel"
+                            app:layout_constraintTop_toBottomOf="@+id/barrierMidfielder" />
+
+                        <TextView
+                            android:id="@+id/textAwayForwardLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dimens_8dp"
+                            android:fontFamily="@font/samsungsans_bold"
+                            android:text="@string/forward"
+                            android:textColor="@color/black"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeForwardLabel"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/barrierMidfielder" />
+
+                        <TextView
+                            android:id="@+id/textHomeForward"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/dimens_8dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toLeftOf="@+id/textAwayForward"
+                            app:layout_constraintTop_toBottomOf="@+id/textHomeForwardLabel"
+                            bind:textLineups="@{data.strHomeLineupForward}"
+                            tools:text="Marcelo\nMarcelo\nMarcelo" />
+
+                        <TextView
+                            android:id="@+id/textAwayForward"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimens_8dp"
+                            android:textAlignment="textEnd"
+                            app:layout_constraintLeft_toRightOf="@+id/textHomeForward"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textAwayForwardLabel"
+                            bind:textLineups="@{data.strAwayLineupForward}"
+                            tools:text="Marcelo\nMarcelo\nMarcelo" />
+
+                        <androidx.constraintlayout.widget.Barrier
+                            android:id="@+id/barrierForward"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:barrierDirection="bottom"
+                            app:constraint_referenced_ids="textHomeForward,textAwayForward"
+                            app:layout_constraintRight_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

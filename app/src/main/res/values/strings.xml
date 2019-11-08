@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">kade-submission-3</string>
+
+    <string name="error_msg_no_internet">No Internet Connection</string>
+    <string name="error_msg_disconnected">Internet Disconnected</string>
+    <string name="error_msg_internal_server_error">Internal Server Error</string>
+    <string name="error_msg_server_error">Server Error</string>
+    <string name="error_msg_response">Error Response</string>
+    <string name="error_msg_error_connect_or_not_found">Error Connect or Not Found</string>
+    <string name="error_msg_bad_request">Bad Request</string>
+    <string name="error_msg_not_authorized">Not Authorized</string>
+
+    <string name="error_message_server">Terjadi kesalahan server</string>
+    <string name="error_message_unregistered">Akun belum teregistrasi atau salah</string>
+    <string name="error_message_with_code">Terjadi kesalahan dengan kode %1$s</string>
+    <string name="error_message_no_internet_connection">Tidak ada koneksi internet</string>
+    <string name="error_message_unexpected">Terjadi kesalahan tidak terduga</string>
+    <string name="error_message_no_content">Cari lagi</string>
+    <string name="error_desc_no_internet_connection">Silakan cek koneksi internet anda dan coba lagi.</string>
+    <string name="error_desc_no_content">Tidak ditemukan pertandingan dengan keyword tersebut</string>
+    <string name="error_desc_no_data">Belum ada data</string>
+    <string name="error_message_oops">Oops Error!</string>
+    <string name="matches">Matches</string>
+    <string name="league">League</string>
+    <string name="double_back_to_exit">Press back again to exit</string>
+    <string name="coba_lagi">Coba lagi</string>
+    <string name="last_match">Last Match</string>
+    <string name="next_match">Next Match</string>
+    <string name="my_league">My League</string>
+    <string name="goals">Goals</string>
+    <string name="match_detail">Match Detail</string>
+    <string name="lineups">Lineups</string>
+    <string name="goalkeeper">Goalkeeper</string>
+    <string name="defense">Defense</string>
+    <string name="midfielder">Midfielder</string>
+    <string name="forward">Forward</string>
+    <string name="cari_pertandingan">Cari pertandingan...</string>
+</resources>

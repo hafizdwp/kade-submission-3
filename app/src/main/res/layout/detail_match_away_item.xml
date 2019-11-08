@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="me.hafizdwp.kade_submission_3.mvvm.detail.DetailMatchGoals" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textMinute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/samsungsans_bold"
+            android:text="@{data.minute + `'`}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="21'" />
+
+        <ImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="@dimen/dimens_20dp"
+            android:layout_height="@dimen/dimens_20dp"
+            android:layout_marginEnd="@dimen/dimens_16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textMinute"
+            app:layout_constraintRight_toLeftOf="@+id/textMinute"
+            app:layout_constraintTop_toTopOf="@+id/textMinute"
+            app:srcCompat="@drawable/ic_ball" />
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimens_16dp"
+            android:fontFamily="@font/samsungsans_regular"
+            android:includeFontPadding="false"
+            android:text="@{data.goalScorer}"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="@dimen/size_16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imgIcon"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/imgIcon"
+            app:layout_constraintTop_toTopOf="@+id/imgIcon"
+            tools:text="Raheem Sterling" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="me.hafizdwp.kade_submission_3.data.source.remote.model.MatchResponse" />
+
+        <variable
+            name="actionListener"
+            type="me.hafizdwp.kade_submission_3.mvvm.league_detail.LeagueDetailActionListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:onClick="@{() -> actionListener.onMatchClick(data)}"
+        android:orientation="vertical"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dimens_16dp">
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_12dp"
+                android:layout_marginRight="@dimen/dimens_16dp"
+                android:fontFamily="@font/samsungsans_regular"
+                android:text="@{data.strDate + ` ` + data.strTimeLocal}"
+                android:textAlignment="center"
+                android:textSize="@dimen/size_16sp"
+                android:visibility="@{data.strDate == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgCover"
+                tools:text="02/11/2019" />
+
+
+            <!--Handled in adapter-->
+            <ImageView
+                android:id="@+id/imgCover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/dummy" />
+
+            <TextView
+                android:id="@+id/textHomeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:layout_marginEnd="@dimen/dimens_8dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:includeFontPadding="false"
+                android:text="@{data.strHomeTeam}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_24sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/textMid"
+                app:layout_constraintTop_toBottomOf="@+id/textDate"
+                tools:text="Newcastle United" />
+
+            <TextView
+                android:id="@+id/textAwayName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_8dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:includeFontPadding="false"
+                android:text="@{data.strAwayTeam}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_24sp"
+                app:layout_constraintLeft_toRightOf="@+id/textMid"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textDate"
+                tools:text="Newcastle United" />
+
+            <TextView
+                android:id="@+id/textMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:includeFontPadding="false"
+                android:text="vs"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_24sp"
+                app:layout_constraintLeft_toRightOf="@+id/textHomeName"
+                app:layout_constraintRight_toLeftOf="@+id/textAwayName"
+                app:layout_constraintTop_toBottomOf="@+id/textTime" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

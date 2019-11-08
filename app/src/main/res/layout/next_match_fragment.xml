@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.hafizdwp.kade_submission_3.mvvm.league_detail.next_match.NextMatchViewModel" />
+
+        <variable
+            name="actionListener"
+            type="me.hafizdwp.kade_submission_3.base.BaseProgressListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <me.hafizdwp.kade_submission_3.util.widget.MyProgressView
+            android:id="@+id/myProgressView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            bind:progressListener="@{actionListener}"
+            bind:progressState="@{viewModel.bProgressState}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fadeScrollbars="true"
+            android:paddingLeft="@dimen/dimens_16dp"
+            android:paddingRight="@dimen/dimens_16dp"
+            android:paddingBottom="@dimen/dimens_16dp"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+
+</layout>

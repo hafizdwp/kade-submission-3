@@ -1,0 +1,70 @@
+package me.hafizdwp.kade_submission_3.data.source.remote.model
+
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+/**
+ * @author hafizdwp
+ * 30/10/2019
+ **/
+@Parcelize
+data class MatchResponse(
+        var idEvent: String?,
+        var idSoccerXML: String?,
+        var strEvent: String?,
+        var strEventAlternate: String?,
+        var strFilename: String?,
+        var strSport: String?,
+        var idLeague: String?,
+        var strLeague: String?,
+        var strSeason: String?,
+        var strDescriptionEN: String?,
+        var strHomeTeam: String?,
+        var strAwayTeam: String?,
+        var intHomeScore: String?,
+        var intRound: String?,
+        var intAwayScore: String?,
+//        var intSpectators: Any?,
+        var strHomeGoalDetails: String?,
+        var strHomeRedCards: String?,
+        var strHomeYellowCards: String?,
+        var strHomeLineupGoalkeeper: String?,
+        var strHomeLineupDefense: String?,
+        var strHomeLineupMidfield: String?,
+        var strHomeLineupForward: String?,
+        var strHomeLineupSubstitutes: String?,
+//        var strHomeFormation: Any?,
+        var strAwayRedCards: String?,
+        var strAwayYellowCards: String?,
+        var strAwayGoalDetails: String?,
+        var strAwayLineupGoalkeeper: String?,
+        var strAwayLineupDefense: String?,
+        var strAwayLineupMidfield: String?,
+        var strAwayLineupForward: String?,
+        var strAwayLineupSubstitutes: String?,
+//        var strAwayFormation: Any?,
+//        var intHomeShots: Any?,
+//        var intAwayShots: Any?,
+        var dateEvent: String?,
+        var dateEventLocal: String?,
+        var strDate: String?,
+        var strTime: String?,
+        var strTimeLocal: String?,
+//        var strTVStation: Any?,
+        var idHomeTeam: String?,
+        var idAwayTeam: String?,
+        var strResult: String?,
+//        var strCircuit: Any?,
+//        var strCountry: Any?,
+//        var strCity: Any?,
+//        var strPoster: Any?,
+//        var strFanart: Any?,
+        var strThumb: String?,
+//        var strBanner: Any?,
+//        var strMap: Any?,
+        var strTweet1: String?,
+        var strTweet2: String?,
+        var strTweet3: String?,
+        var strVideo: String?,
+        var strLocked: String?
+) : Parcelable

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="me.hafizdwp.kade_submission_3.data.source.remote.model.MatchResponse" />
+
+        <variable
+            name="actionListener"
+            type="me.hafizdwp.kade_submission_3.mvvm.search.SearchActionListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimens_12dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:onClick="@{() -> actionListener.onMatchClick(data)}"
+        android:orientation="vertical"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_12dp"
+                android:layout_marginRight="@dimen/dimens_16dp"
+                android:fontFamily="@font/samsungsans_regular"
+                android:text="@{data.dateEvent + ` ` + data.strTime}"
+                android:textAlignment="center"
+                android:textSize="@dimen/size_16sp"
+                android:visibility="@{data.dateEvent == null ? View.GONE : View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgCover"
+                tools:text="02/11/2019 12:30" />
+
+
+            <!--Handled in adapter-->
+            <ImageView
+                android:id="@+id/imgCover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:loadImage="@{data.strThumb}"
+                bind:isOriginalImageSize="@{true}"
+                bind:fitCenterCrop="@{true}"
+                tools:src="@drawable/dummy" />
+
+            <TextView
+                android:id="@+id/textHomeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:includeFontPadding="false"
+                android:text="@{data.strHomeTeam}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_18sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/textMid"
+                app:layout_constraintTop_toBottomOf="@+id/textDate"
+                tools:text="Newcastle United" />
+
+            <TextView
+                android:id="@+id/textAwayName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimens_8dp"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:includeFontPadding="false"
+                android:text="@{data.strAwayTeam}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_18sp"
+                app:layout_constraintLeft_toRightOf="@+id/textMid"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textDate"
+                tools:text="Newcastle United" />
+
+            <TextView
+                android:id="@+id/textHomeScore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimens_16dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:text="@{data.intHomeScore}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_36sp"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/textMid"
+                app:layout_constraintTop_toBottomOf="@+id/barrier"
+                tools:text="2" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="textHomeName,textAwayName" />
+
+            <TextView
+                android:id="@+id/textMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/samsungsans_bold"
+                android:text=":"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_36sp"
+                app:layout_constraintLeft_toRightOf="@+id/textHomeScore"
+                app:layout_constraintRight_toLeftOf="@+id/textAwayScore"
+                app:layout_constraintTop_toBottomOf="@+id/barrier" />
+
+            <TextView
+                android:id="@+id/textAwayScore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimens_16dp"
+                android:fontFamily="@font/samsungsans_bold"
+                android:text="@{data.intAwayScore}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/size_36sp"
+                app:layout_constraintLeft_toRightOf="@+id/textMid"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barrier"
+                tools:text="5" />
+
+            <!--Handled in adapter-->
+            <TextView
+                android:id="@+id/textHomeHero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/samsungsans_regular"
+                android:textAlignment="center"
+                android:textSize="@dimen/size_14sp"
+                app:layout_constraintLeft_toLeftOf="@+id/textHomeScore"
+                app:layout_constraintRight_toRightOf="@+id/textHomeScore"
+                app:layout_constraintTop_toBottomOf="@+id/textHomeScore"
+                tools:text="17' Rafi Ahmad \n21' Rafi Ahmad" />
+
+            <!--Handled in adapter-->
+            <TextView
+                android:id="@+id/textAwayHero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/samsungsans_regular"
+                android:textAlignment="center"
+                android:textSize="@dimen/size_14sp"
+                app:layout_constraintLeft_toLeftOf="@+id/textAwayScore"
+                app:layout_constraintRight_toRightOf="@+id/textAwayScore"
+                app:layout_constraintTop_toBottomOf="@+id/textAwayScore"
+                tools:text="17' Rafi Ahmad \n21' Rafi Ahmad" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</layout>
